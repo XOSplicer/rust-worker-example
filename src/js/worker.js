@@ -1,8 +1,8 @@
-import { add } from '../crate/Cargo.toml';
+import * as wasm from '../crate/Cargo.toml';
 import registerPromiseWorker from 'promise-worker/register';
 
-registerPromiseWorker((message) => {
-    return 'pong';
+registerPromiseWorker(({ method, args }) => {
+    return wasm[method](...args);
 });
 
 // run after initalization

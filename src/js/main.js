@@ -3,8 +3,6 @@ import PromiseWorker from 'promise-worker';
 
 module.run();
 
-
-
 const worker = new Worker('worker.js');
 (new Promise((resolve, reject) => {
     // must wait for the service worker to be alive before sending messages
@@ -14,7 +12,7 @@ const worker = new Worker('worker.js');
 })).then(() => {
     console.log('initialized');
     const promiseWorker = new PromiseWorker(worker);
-    return promiseWorker.postMessage([1, 2]);
+    return promiseWorker.postMessage({ method: 'add', args: [1, 2]});
 }).then(res => {
     console.log(res);
 })
