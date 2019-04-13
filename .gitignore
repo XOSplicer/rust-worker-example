@@ -1,5 +1,9 @@
 dist
 node_modules
-crate/pkg
-crate/target
-crate/wasm-pack.log
+src/crate/pkg
+src/crate/target
+src/crate/wasm-pack.log
+.cache
+*.lock
+*-lock.json
+*.log
