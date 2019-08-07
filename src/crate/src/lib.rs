@@ -4,6 +4,7 @@ extern crate cfg_if;
 extern crate wasm_bindgen;
 extern crate web_sys;
 extern crate js_sys;
+extern crate comment_strip;
 use wasm_bindgen::prelude::*;
 
 fn set_panic_hook() {
@@ -26,6 +27,16 @@ cfg_if! {
 #[wasm_bindgen]
 pub fn add(a: i32, b: i32) -> i32 {
     a + b
+}
+
+
+#[wasm_bindgen]
+pub fn strip_comments(s: &str) -> String {
+    let data = String::from(s);
+    let style = comment_strip::CommentStyle::C;
+    let remove_blanks = true;
+    comment_strip::strip_comments(data, style, remove_blanks)
+        .expect("could not remove comments")
 }
 
 // Called by our JS entry point to run the example

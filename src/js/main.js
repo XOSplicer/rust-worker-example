@@ -16,9 +16,17 @@ async function loadWorker() {
 }
 
 (async () => {
- const worker = await loadWorker();
- const res = await worker.postMessage({ method: 'add', args: [1, 4]});
- console.log(res);
+    const worker = await loadWorker();
+    // const res = await worker.postMessage({ method: 'add', args: [1, 4]});
+    // console.log(res);
+    document.getElementById('btn-strip').onclick = async () => {
+        const input = document.getElementById('text-input').value || '';
+        const res = await worker.postMessage({
+            method: 'strip_comments',
+            args: [input.trim()]
+        });
+        document.getElementById('text-output').innerText = res;
+    };
 })();
 
 
